@@ -18,7 +18,7 @@ public class Line extends Frame implements  GPrimitive{
 	
 	@Override
 	public void drawPrimitive(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(inline);
 		g.drawLine(x1, y1, x2, y2);
 		
 	}

@@ -35,23 +35,39 @@ public class MyWind2 extends Frame {
 				y1 = e.getY();
 			}
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				x2 = e.getX();
-				y2 = e.getY();
-	
-				Line lin=new Line(x1, x1, x1, x1, Color.BLUE);
-				gp[task]=lin;
-				Oval Ol=new Oval(x1, y1, x2, y2, Color.RED);
-				gp[task]=Ol;
-				Rectangle Rt=new Rectangle(x1, y1, x2, y2, Color.BLACK);
-				gp[task]=Rt;
-				task++;
-				repaint();
-			
-			}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			x2 = e.getX();
+			y2 = e.getY();
 
-			@Override
+			// Get selected shape from menu
+			String selectedShape = wind1.menu.getSelectedItem();
+			
+			// Get selected color
+			Color selectedColor = Color.BLACK; // default
+			if (wind1.CB1.getState()) {
+				selectedColor = Color.GREEN;
+			} else if (wind1.CB2.getState()) {
+				selectedColor = Color.RED;
+			} else if (wind1.CB3.getState()) {
+				selectedColor = Color.BLUE;
+			}
+			
+			// Create only the selected primitive
+			if ("линия".equals(selectedShape)) {
+				gp[task] = new Line(x1, y1, x2, y2, selectedColor);
+				task++;
+			} else if ("незапълнен овал".equals(selectedShape)) {
+				gp[task] = new Oval(x1, y1, x2-x1, y2-y1, selectedColor);
+				task++;
+			} else if ("запълнен четириъгълник".equals(selectedShape)) {
+				gp[task] = new Rectangle(x1, y1, x2-x1, y2-y1, selectedColor);
+				task++;
+			}
+			
+			repaint();
+		
+		}			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				
